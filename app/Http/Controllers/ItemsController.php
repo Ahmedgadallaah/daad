@@ -11,7 +11,14 @@ class ItemsController extends Controller
         ->map(function ($items ) use($locale){
 
             return[
-                'name'=>$items->getTranslatedAttribute('name', $locale)
+                'id'=>$items->id,
+                'name'=>$items->getTranslatedAttribute('name', $locale),
+                'short_description'=>$items->getTranslatedAttribute('short_description', $locale),
+                'long_description'=>$items->getTranslatedAttribute('long_description', $locale),
+                'category_id'=>$items->category_id,
+                'file' => json_decode($items->file),
+                'year'=>$items->created_at->format('Y'),
+                'created_at'=>$items->created_at->format('Y-m-d'),
             ];
         });
         return response()->json($items);
