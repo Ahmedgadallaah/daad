@@ -13,6 +13,7 @@ class CategoriesController extends Controller
         $categories  = Category::where('parent_id' , null)->get()
             ->map(function ($categories) use ($locale){
             return [
+                'id' =>$categories->id,
                 'name' => $categories->getTranslatedAttribute('name' , $locale) ,
                 'description' => $categories->getTranslatedAttribute('description' , $locale) ,
                 'file' => json_decode($categories->file)
@@ -26,6 +27,7 @@ class CategoriesController extends Controller
         $categories  = Category::where('parent_id' ,$id)->get()
             ->map(function ($categories) use ($locale){
             return [
+                'id' =>$categories->id,
                 'name' => $categories->getTranslatedAttribute('name' , $locale) ,
                 'description' => $categories->getTranslatedAttribute('description' , $locale) ,
                 'file' => json_decode($categories->file)
@@ -34,4 +36,21 @@ class CategoriesController extends Controller
         return response()->json($categories);
 
     }
+
+
+//    // Categories
+//    public function sub_categories($locale , $id)
+//    {
+//        $categories  = Category::where('parent_id' ,$id)->get()
+//            ->map(function ($categories) use ($locale){
+//                return [
+//                    'id' =>$categories->id,
+//                    'name' => $categories->getTranslatedAttribute('name' , $locale) ,
+//                    'description' => $categories->getTranslatedAttribute('description' , $locale) ,
+//                    'file' => json_decode($categories->file)
+//                ];
+//            });
+//        return response()->json($categories);
+//
+//    }
 }
